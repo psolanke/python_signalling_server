@@ -19,7 +19,14 @@
     </style>
   </head>
   <body>
-  	<button id="get_message" onclick="get_msg()">Get Message</button>
-    <div id="Message Display">No Message</div>
+    <form id="register_as_user" method="POST" action="#">
+      <input type="text" name="register_as_user_data" id="register_as_user_data" placeholder="Enter ID">
+      <input type="submit" value="Register As User">
+    </form>
+    <form id="contact_endpoint_server" method="POST" action="#">
+      <input type="text" name="endpoint_server_id_data" id="endpoint_server_id_data" placeholder="Enter Endpoint ID">
+      <input type="text" name="sdp_data" id="sdp_data" placeholder="Enter SDP message">
+      <input type="submit" value="Contact Point Server">
+    </form>
   </body>
 </html>
