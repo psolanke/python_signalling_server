@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify
-from flask_socketio import SocketIO, emit, join_room
+from flask_socketio import SocketIO, emit, join_room, rooms
 # from storage_utils import StorageManager
 
 app = Flask(__name__)
@@ -18,7 +18,7 @@ def test_client():
 @socketio.on('connect', namespace='/signalling')
 def connected():
 	print('Connected')
-	emit('response',{'message': 'Thank you for connecting'})
+	emit('response',{'message': 'Connection Successful!!'})
 
 @socketio.on('get_response', namespace='/signalling')
 def test_response(message):
@@ -31,6 +31,7 @@ def register_user(message):
 	print(message['type'])
 	room = message['id']
 	join_room(room)
+	emit('response',{'message':'In rooms: ' + ', '.join(rooms())})
 
 @socketio.on('contact_endpoint_server', namespace='/signalling')
 def get_endpoint_server(message):
