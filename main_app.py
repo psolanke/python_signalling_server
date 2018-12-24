@@ -1,6 +1,8 @@
 from flask import Flask, render_template, jsonify
 from flask_socketio import SocketIO, emit, join_room, rooms
 from threading import Lock
+import os
+import eventlet
 
 SIGNALLING_NAMESPACE = '/signalling'
 TEST_NAMESPACE = '/test'
@@ -8,7 +10,7 @@ TEST_NAMESPACE = '/test'
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'PLACEHOLDER'
 
-socketio = SocketIO(app, async_mode=None)
+socketio = SocketIO(app, async_mode='eventlet')
 
 @app.route('/')
 def index():
@@ -49,4 +51,5 @@ def get_endpoint_server(message):
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    port = int(os.environ.get('PORT', 33507))
+    socketio.run(app, host='0.0.0.0', port=port, debug=True)
