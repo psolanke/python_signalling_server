@@ -1,5 +1,5 @@
 build:
   docker:
-    web: Dockerfile
+    web: dockerfile
 run:
   web: gunicorn --worker-class eventlet -w 1 --log-file=- main_app:app
