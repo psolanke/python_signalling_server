@@ -13,6 +13,6 @@ RUN pip install -r requirements.txt
 
 COPY . /app
 
-ENTRYPOINT [ "python" ]
+#ENTRYPOINT [ "python" ]
 
-CMD [ "main_app.py" ]
+CMD [ "gunicorn", "--worker-class", "eventlet", "-w", "1", "--log-file=-", "main_app:app" ]

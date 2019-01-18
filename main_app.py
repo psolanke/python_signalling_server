@@ -42,12 +42,19 @@ def register_user(message):
     join_room(room)
     emit('response',{'message':'In rooms: {}'.format(room)})
 
-@socketio.on('contact_endpoint_server', namespace=SIGNALLING_NAMESPACE)
+@socketio.on('send_sdp_message', namespace=SIGNALLING_NAMESPACE)
 def get_endpoint_server(message):
     print(message['endpoint_server_id'])
     room = message['endpoint_server_id']
     sdp_message = message['sdp_message']
     emit('sdp_message', {'sdp_message':sdp_message}, room=room)
+
+@socketio.on('send_ice_candidate', namespace=SIGNALLING_NAMESPACE)
+def get_endpoint_server(message):
+    print(message['endpoint_server_id'])
+    room = message['endpoint_server_id']
+    ice_candidates = message['ice_candidates']
+    emit('ice_candidate_message', {'ice_candidates':ice_candidates}, room=room)
 
 
 if __name__ == '__main__':

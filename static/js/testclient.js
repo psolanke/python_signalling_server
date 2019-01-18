@@ -1,6 +1,7 @@
 $(document).ready(function(){
   namespace = '/signalling';
-  socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
+  socket = io.connect('http://http://psolanke.pythonanywhere.com/signalling')
+  // socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
   socket.on('sdp_message', function(msg){
     console.log(msg.sdp_message);
   });
